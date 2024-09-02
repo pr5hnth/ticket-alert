@@ -9,7 +9,7 @@ keep_alive()
 # Telegram setup
 bot_token = '7195218947:AAFEUOU-BQ69rNeuKZwmAbDN3PQfrqr9SBA'
 chat_id = '891730654'
-message = "Tickets for Thursday are now available!"
+message = " GOAT Tickets for Thursday are now available!"
 
 def send_telegram_alert():
     try:
@@ -41,5 +41,5 @@ def check_tickets():
 if __name__ == "__main__":
     while True:
         check_tickets()
-        time.sleep(5)  # Wait for 5 seconds before checking again
+        time.sleep(7)  # Wait for 5 seconds before checking again
 
