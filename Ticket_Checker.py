@@ -2,14 +2,10 @@ import time
 import requests
 from bs4 import BeautifulSoup
 
-from keep_alive import keep_alive
-keep_alive()
-
-
 # Telegram setup
 bot_token = '7195218947:AAFEUOU-BQ69rNeuKZwmAbDN3PQfrqr9SBA'
 chat_id = '891730654'
-message = " GOAT Tickets for Thursday are now available!"
+message = "GOAT Tickets for Thursday are now available!"
 
 def send_telegram_alert():
     try:
@@ -22,9 +18,8 @@ def send_telegram_alert():
     except Exception as e:
         print(f"Error sending Telegram message: {e}")
 
-def check_tickets():
+def check_tickets(url):
     try:
-        url = "https://paytm.com/movies/chennai/varadaraja-cinemas-4k-rgb-laser-dolby-atmos-c/3952"
         response = requests.get(url)
         soup = BeautifulSoup(response.text, 'html.parser')
 
@@ -39,7 +34,12 @@ def check_tickets():
         print(f"An error occurred: {e}")
 
 if __name__ == "__main__":
-    while True:
-        check_tickets()
-        time.sleep(7)  # Wait for 5 seconds before checking again
+    urls = [
+        "https://paytm.com/movies/chennai/varadaraja-cinemas-4k-rgb-laser-dolby-atmos-c/3952",
+        "https://in.bookmyshow.com/buytickets/kckrishnavenicinemas-rg3-laser-dolbyatmos-tnagar/cinema-chen-KVCS-MT/20240903"
+    ]
 
+    while True:
+        for url in urls:
+            check_tickets(url)
+        time.sleep(7)  # Wait for 7 seconds before checking again
