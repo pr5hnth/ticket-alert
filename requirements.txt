@@ -1,5 +1,2 @@
 request
 BeautifulSoup
-smtplib
-time
-MIMEText
