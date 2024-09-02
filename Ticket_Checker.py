@@ -29,7 +29,7 @@ def check_tickets():
         soup = BeautifulSoup(response.text, 'html.parser')
 
         # Example logic to find "Thursday"
-        if 'Thu' in soup.text:
+        if 'Tue' in soup.text:
             send_telegram_alert()
         else:
             print("Thursday tickets not available yet.")
