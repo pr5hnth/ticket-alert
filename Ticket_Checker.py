@@ -47,5 +47,6 @@ def check_tickets():
         print(f"An error occurred: {e}")
 
 if __name__ == "__main__":
+    while True:
         check_tickets()
-   
+        time.sleep(5)  # Wait for 5 seconds before checking again
