@@ -1,8 +1,12 @@
 import time
 import requests
 from bs4 import BeautifulSoup
+import os
 import smtplib
 from email.mime.text import MIMEText
+
+from keep_alive import keep_alive
+keep_alive()
 
 # Email setup
 smtp_server = 'smtp.gmail.com'
