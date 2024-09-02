@@ -1,34 +1,26 @@
 import time
 import requests
 from bs4 import BeautifulSoup
-import os
-import smtplib
-from email.mime.text import MIMEText
 
 from keep_alive import keep_alive
 keep_alive()
 
-# Email setup
-smtp_server = 'smtp.gmail.com'
-smtp_port = 587
-email_user = 'mashrajnetflix@gmail.com'
-email_password = 'geqsqyjooaesgqvo'
-recipient_email = 'xenonrecords1@gmail.com'
 
-def send_email_alert():
+# Telegram setup
+bot_token = '7195218947:AAFEUOU-BQ69rNeuKZwmAbDN3PQfrqr9SBA'
+chat_id = '891730654'
+message = "Tickets for Thursday are now available!"
+
+def send_telegram_alert():
     try:
-        msg = MIMEText("Tickets for Thursday are now available!")
-        msg['Subject'] = 'IMP: Urgent!: GOAT Ticket Alert'
-        msg['From'] = email_user
-        msg['To'] = recipient_email
-
-        with smtplib.SMTP(smtp_server, smtp_port) as server:
-            server.starttls()
-            server.login(email_user, email_password)
-            server.sendmail(email_user, recipient_email, msg.as_string())
-        print("Email sent successfully.")
+        send_url = f'https://api.telegram.org/bot{bot_token}/sendMessage?chat_id={chat_id}&text={message}'
+        response = requests.get(send_url)
+        if response.status_code == 200:
+            print("Telegram message sent successfully.")
+        else:
+            print(f"Failed to send message: {response.status_code}")
     except Exception as e:
-        print(f"Error sending email: {e}")
+        print(f"Error sending Telegram message: {e}")
 
 def check_tickets():
     try:
@@ -37,8 +29,8 @@ def check_tickets():
         soup = BeautifulSoup(response.text, 'html.parser')
 
         # Example logic to find "Thursday"
-        if 'Thu' in soup.text:
-            send_email_alert()
+        if 'Mon' in soup.text:
+            send_telegram_alert()
         else:
             print("Thursday tickets not available yet.")
     except requests.exceptions.RequestException as e:
@@ -50,3 +42,4 @@ if __name__ == "__main__":
     while True:
         check_tickets()
         time.sleep(5)  # Wait for 5 seconds before checking again
+
