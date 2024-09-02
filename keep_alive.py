@@ -1,7 +1,8 @@
+import flask
 from flask import Flask, render_template
 from threading import Thread
 
-app = Flash(_name_)
+app = Flask(__name__)
 
 @app.route('/')
 def index():
